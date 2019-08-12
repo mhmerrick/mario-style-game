@@ -87,17 +87,20 @@ public class View extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		int floorX = 0;
+		int floorX = -1910;
 
 		// Draw background
-		g.drawImage(background, model.back_x, -10, 1920, 710, null);
+		for(int i = 0; i < 3; i++) {
+			g.drawImage(background, model.back_x - floorX, -10, 1920, 710, null);
+			floorX += 1920;
+		}
 		
 		// Draw floor
+		floorX = -1200;
 		for(int i = 0; i < 100; i++) {
-			g.drawImage(floorBlock, floorX-model.scrollPos, 634, 60, 60, null);
+			g.drawImage(floorBlock, floorX - model.scrollPos, 634, 60, 60, null);
 			floorX += 60;
 		}
-		floorX = 0;
 
 		// Draw sprites
 		for(int i = 0; i < model.sprites.size(); i++) {

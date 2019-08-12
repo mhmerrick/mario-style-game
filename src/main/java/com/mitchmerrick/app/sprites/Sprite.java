@@ -51,7 +51,7 @@ public abstract class Sprite {
 			return true;
 	}
 
-	void Barrier(int scrollPos, int prevScrollPos, Sprite a, Sprite s) {
+	void barrier(int scrollPos, int prevScrollPos, Sprite a, Sprite s) {
 		// From left
 		if(a.x + a.w >= s.x  + scrollPos && a.prev_x + a.w < s.x + prevScrollPos)  {
 			direction = Directions.LEFT;

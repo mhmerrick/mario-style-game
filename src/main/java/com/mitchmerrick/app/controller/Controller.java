@@ -10,16 +10,16 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class Controller implements ActionListener, MouseListener, KeyListener {
-	Model model;
-	String rightClick = "";
-	boolean leftClick = false;
-	boolean keyLeft = false;
-	boolean keyRight = false;
-	boolean keyUp = false;
-	boolean keyDown = false;
-	boolean keySpace = false;
-	int mouseDownX;
-	int mouseDownY;
+	private Model model;
+	private String rightClick = "";
+	private boolean leftClick = false;
+	private boolean keyLeft = false;
+	private boolean keyRight = false;
+	private boolean keyUp = false;
+	private boolean keyDown = false;
+	private boolean keySpace = false;
+	private int mouseDownX;
+	private int mouseDownY;
 
 	public Controller(Model m) {
 		model = m;
@@ -80,14 +80,15 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
-			case KeyEvent.VK_RIGHT: keyRight = false; break;
-			case KeyEvent.VK_LEFT: keyLeft = false; break;
-			case KeyEvent.VK_UP: keyUp = false; break;
-			case KeyEvent.VK_DOWN: keyDown = false; break;
-			case KeyEvent.VK_SPACE: keySpace = false; break;
-			case KeyEvent.VK_T: rightClick = ""; break;
-			case KeyEvent.VK_G: rightClick = ""; break;
-			case KeyEvent.VK_B: rightClick = ""; break;
+			case KeyEvent.VK_RIGHT: keyRight = false; 	break;
+			case KeyEvent.VK_LEFT: 	keyLeft = false; 	break;
+			case KeyEvent.VK_UP: 	keyUp = false; 		break;
+			case KeyEvent.VK_DOWN: 	keyDown = false; 	break;
+			case KeyEvent.VK_SPACE: keySpace = false; 	break;
+			case KeyEvent.VK_T:
+			case KeyEvent.VK_B:
+			case KeyEvent.VK_G:
+				rightClick = ""; 	break;
 		}
 	}
 
@@ -95,11 +96,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 		model.mario.prevLocation();
 		// Scroll left or right and cycle though mario_images 
 		if(keyRight) {
-			model.mario.forward = true;
 			model.mario.right();
 		}
 		if(keyLeft) {
-			model.mario.forward = false;
 			model.mario.left();
 		}
 		if(keySpace)
