@@ -21,7 +21,7 @@ public class Model
 		sprites = new ArrayList<Sprite>();
 		sprites.add(mario);
 		sprites.add(flagPole);
-		unmarshall(); // Loads previously saved game
+//		unmarshall(); // Loads previously saved game
 	}
 
 	public void update() {

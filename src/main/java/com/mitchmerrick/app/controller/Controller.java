@@ -11,16 +11,13 @@ import java.awt.event.KeyEvent;
 
 public class Controller implements ActionListener, MouseListener, KeyListener {
 	Model model;
-	
-	boolean rightClick;
-	boolean leftClick;
-	boolean keyLeft;
-	boolean keyRight;
-	boolean keyUp;
-	boolean keyDown;
-	boolean spaceBar;
-	boolean keySpace;
-	
+	String rightClick = "";
+	boolean leftClick = false;
+	boolean keyLeft = false;
+	boolean keyRight = false;
+	boolean keyUp = false;
+	boolean keyDown = false;
+	boolean keySpace = false;
 	int mouseDownX;
 	int mouseDownY;
 
@@ -35,7 +32,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 		
 		switch(e.getButton()) {
 			case MouseEvent.BUTTON1: leftClick = true; break;
-			case MouseEvent.BUTTON3: rightClick = true; break;
 		}
 	}
 
@@ -54,15 +50,16 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 		if(leftClick)
 			model.addBrick(left + model.scrollPos, top, right - left, bottom - top);
 		else {
-//			model.addCoinBlock(x1 + model.scrollPos, top, 60, 60);
-//			model.addTurtle(left + model.scrollPos, top);
-//			model.addGoomba(left + model.scrollPos, top);
+			switch(rightClick) {
+				case "coinBlock": model.addCoinBlock(x1 + model.scrollPos, top, 60, 60); break;
+				case "turtle": model.addTurtle(left + model.scrollPos, top); break;
+				case "goomba": model.addGoomba(left + model.scrollPos, top); break;
+			}
 		}
 		
 		// Reset variables
 		switch(e.getButton()) {
 			case MouseEvent.BUTTON1: leftClick = false; break;
-			case MouseEvent.BUTTON3: rightClick = false; break;
 		}
 	}
 
@@ -75,6 +72,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 			case KeyEvent.VK_SPACE: keySpace = true; break;
 			case KeyEvent.VK_S: model.save("src/main/resources/map.json"); break;
 			case KeyEvent.VK_L: model.unmarshall(); break;
+			case KeyEvent.VK_T: rightClick = "turtle"; break;
+			case KeyEvent.VK_G: rightClick = "goomba"; break;
+			case KeyEvent.VK_B: rightClick = "coinBlock"; break;
 		}
 	}
 
@@ -85,11 +85,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 			case KeyEvent.VK_UP: keyUp = false; break;
 			case KeyEvent.VK_DOWN: keyDown = false; break;
 			case KeyEvent.VK_SPACE: keySpace = false; break;
+			case KeyEvent.VK_T: rightClick = ""; break;
+			case KeyEvent.VK_G: rightClick = ""; break;
+			case KeyEvent.VK_B: rightClick = ""; break;
 		}
-	}
-
-	public void keyTyped(KeyEvent e) {
-		
 	}
 
 	public void update() {
@@ -107,11 +106,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 			model.mario.jump();
 	}
 
-
-	public void mouseEntered(MouseEvent e) 		{    }
-	public void mouseExited(MouseEvent e) 		{    }
-	public void mouseClicked(MouseEvent e) 		{    }
-	public void actionPerformed(ActionEvent e) 	{	 }
+	public void keyTyped(KeyEvent e) 			{ 	}
+	public void mouseEntered(MouseEvent e) 		{   }
+	public void mouseExited(MouseEvent e) 		{   }
+	public void mouseClicked(MouseEvent e) 		{   }
+	public void actionPerformed(ActionEvent e) 	{	}
 	
 	
 }
