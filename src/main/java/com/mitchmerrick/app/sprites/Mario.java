@@ -11,10 +11,7 @@ public class Mario extends Sprite {
 	private Model model;
 	private int marioFrame;
 	private int count; // Counts when mario is in the air
-//	public boolean forward; // Walking direction
-
-
-	static Sounds bump = new Sounds("src/main/resources/sounds/bump.wav", 5);
+	static Sounds bump;
 
 	public Mario(Model m) {
 		model = m;
@@ -24,9 +21,10 @@ public class Mario extends Sprite {
 		h = 95;
 		vert_vel = 0;
 		marioFrame = 0;
-//		forward = true;
 		direction = Directions.RIGHT;
 		count = 0;
+
+		bump = new Sounds("/sounds/bump.wav", 2);
 	}
 
 	boolean isMario() { return true; }
@@ -141,26 +139,29 @@ public class Mario extends Sprite {
 	public Mario(Json ob, Model m) {
 		model = m;
 		// Change values back to numbers
-		x = (int)ob.getLong("x");
+//		x = (int)ob.getLong("x");
+		x = 200;
 		w = (int)ob.getLong("w");
 		h = (int)ob.getLong("h");
 		vert_vel = (int)ob.getDouble("vert_vel");
 		marioFrame = (int)ob.getLong("marioFrame");
-		model.scrollPos = (int)ob.getLong("model.scrollPos");
-		model.back_x = (int)ob.getLong("model.back_x");
+//		model.scrollPos = (int)ob.getLong("model.scrollPos");
+//		model.back_x = (int)ob.getLong("model.back_x");
+		model.scrollPos = 0;
+		model.back_x = 0;
 		direction = Directions.RIGHT;
 	}
 
 	public Json marshall() {
 		// Put values into Jason object
 		Json ob = Json.newObject();
-		ob.add("x", x);
+//		ob.add("x", x);
 		ob.add("w", w);
 		ob.add("h", h);
 		ob.add("vert_vel", vert_vel);
 		ob.add("marioFrame", marioFrame);
-		ob.add("model.scrollPos", model.scrollPos);
-		ob.add("model.back_x", model.back_x);
+//		ob.add("model.scrollPos", model.scrollPos);
+//		ob.add("model.back_x", model.back_x);
 		ob.add("type", "src.main.java.sprites.Mario");
 		return ob;
 	}

@@ -1,5 +1,6 @@
 package com.mitchmerrick.app.sprites;
 
+import com.mitchmerrick.app.Sounds;
 import com.mitchmerrick.app.model.Model;
 import com.mitchmerrick.app.view.View;
 import com.mitchmerrick.app.Json;
@@ -11,6 +12,7 @@ public class CoinBlock extends Sprite {
 	
 	int blockIMG;
 	int coins;
+	static Sounds coinSound = new Sounds("/sounds/coinSound.wav", 3);
 	
 	public CoinBlock(Model m, int xx, int yy, int ww, int hh) {
 		model = m;

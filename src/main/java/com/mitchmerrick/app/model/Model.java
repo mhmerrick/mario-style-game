@@ -3,6 +3,7 @@ package com.mitchmerrick.app.model;
 import com.mitchmerrick.app.sprites.*;
 import com.mitchmerrick.app.Json;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Model
@@ -63,7 +64,12 @@ public class Model
 
 	public void unmarshall() {
 		sprites.clear(); // Clear all current sprites
-		Json ob = Json.load("src/main/resources/map.json"); // Load file into src.main.java.Json object
+		// Load map
+		scrollPos = 0;
+		prev_scrollPos = -1;
+		back_x = 0;
+		InputStream is = getClass().getResourceAsStream("/map.json");
+		Json ob = Json.load(is);
 		Json json_sprites = ob.get("sprites"); // Put sprites into src.main.java.Json object
 		for(int i = 0; i < json_sprites.size(); i++) {
 			Json j = json_sprites.get(i); // Put sprite dimensions into src.main.java.Json object
@@ -102,7 +108,7 @@ public class Model
 
 	public void save(String filename) {
 		Json ob = marshall();
-		ob.save(filename);
+		ob.save(getClass().getResource(filename).getPath());
 	}
 
 

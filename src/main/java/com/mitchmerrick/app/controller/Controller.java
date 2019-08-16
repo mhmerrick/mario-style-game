@@ -70,7 +70,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 			case KeyEvent.VK_UP: keyUp = true; break;
 			case KeyEvent.VK_DOWN: keyDown = true; break;
 			case KeyEvent.VK_SPACE: keySpace = true; break;
-			case KeyEvent.VK_S: model.save("src/main/resources/map.json"); break;
+			case KeyEvent.VK_S: model.save("/map.json"); break;
 			case KeyEvent.VK_L: model.unmarshall(); break;
 			case KeyEvent.VK_T: rightClick = "turtle"; break;
 			case KeyEvent.VK_G: rightClick = "goomba"; break;

@@ -1,6 +1,5 @@
 package com.mitchmerrick.app.sprites;
 
-import com.mitchmerrick.app.Sounds;
 import com.mitchmerrick.app.model.Model;
 import com.mitchmerrick.app.view.View;
 import com.mitchmerrick.app.Json;
@@ -11,12 +10,9 @@ import java.util.Random;
 
 public class Coin extends Sprite {
 	Model model;
-	
 	double vert_vel;
 	int coinFrame;
-	int num;
-	
-	static Sounds coinSound;
+	int randNum;
 	
 	Random rand = new Random(System.currentTimeMillis());
 	
@@ -30,10 +26,9 @@ public class Coin extends Sprite {
 		w = 30;
 		h = 30;
 		
-		num = rand.nextInt(100) + 1;
-		
-		coinSound = new Sounds("src/main/resources/sounds/coinSound.wav", 5);
-		coinSound.play();
+		randNum = rand.nextInt(100) + 1;
+
+		CoinBlock.coinSound.play();
 	}
 	
 	boolean isCoin() { return true; }
@@ -50,7 +45,7 @@ public class Coin extends Sprite {
 		
 		
 		// src.main.java.sprites.Coin direction
-		if(num < 50)
+		if(randNum < 50)
 			x += 6;
 		else
 			x -= 6;
