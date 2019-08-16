@@ -1,6 +1,5 @@
 package com.mitchmerrick.app.model;
 
-import com.mitchmerrick.app.Game;
 import com.mitchmerrick.app.Sounds;
 import com.mitchmerrick.app.sprites.*;
 import com.mitchmerrick.app.Json;
