@@ -1,4 +1,4 @@
-#mario-style-game
+# mario-style-game
 Created using MVC architecture. 
 
 ## Controls
