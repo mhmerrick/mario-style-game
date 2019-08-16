@@ -3,7 +3,6 @@ package com.mitchmerrick.app;
 import com.mitchmerrick.app.controller.Controller;
 import com.mitchmerrick.app.model.Model;
 import com.mitchmerrick.app.view.View;
-import org.apache.commons.io.FileUtils;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -17,7 +16,7 @@ public class Game extends JFrame {
 	static Sounds themeMusic;
 
 	// TODO: fix music
-	public Game() throws IOException {
+	public Game() {
 		model = new Model();
 		controller = new Controller(model);
 		view = new View(model);
@@ -30,15 +29,11 @@ public class Game extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 
-//		InputStream is = getClass().getResourceAsStream("/sounds/Overworld.wav");
-//		File Overworld = File.createTempFile("Overworld", ".wav");
-//		Overworld.deleteOnExit();
-//		FileUtils.copyInputStreamToFile(is, Overworld);
-//		themeMusic = new Sounds(Overworld, 2);
 		themeMusic = new Sounds("/sounds/Overworld.wav", 2);
 	}
 
 	public void run() {
+		// TODO: fix music being played
 		themeMusic.play();
 
 		while(true) {
@@ -57,9 +52,9 @@ public class Game extends JFrame {
 		}
 	}
 
+	// TODO: remove target from github
 
-
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Game g = new Game();
 		g.run();
 	}
