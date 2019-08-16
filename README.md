@@ -2,8 +2,8 @@
 Created using MVC architecture. 
 
 ## Controls
-* Use the left and right arrow keys to walk.
-* Use the space bar to jump.
+* Left and right arrow keys to walk.
+* Space bar to jump.
 * Press 'L' to load the previously saved map/restart the game.
 
 ## How to Create a Map
@@ -15,3 +15,4 @@ Created using MVC architecture.
         * 'G' - goomba
         * 'B' - coin block
 4) Press 'S' to save your current map.
+5) Press 'L' to load your new map.

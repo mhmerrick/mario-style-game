@@ -7,7 +7,6 @@ package com.mitchmerrick.app;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 import java.nio.file.Paths;

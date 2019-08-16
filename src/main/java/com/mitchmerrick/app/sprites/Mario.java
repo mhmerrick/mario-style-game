@@ -128,6 +128,7 @@ public class Mario extends Sprite {
 			marioFrame = 4;
 	}
 
+	// TODO: fix goomba jump
 	public void jump() {
 		if(count < 4)
 			vert_vel -= 14;
@@ -139,14 +140,11 @@ public class Mario extends Sprite {
 	public Mario(Json ob, Model m) {
 		model = m;
 		// Change values back to numbers
-//		x = (int)ob.getLong("x");
 		x = 200;
-		w = (int)ob.getLong("w");
-		h = (int)ob.getLong("h");
-		vert_vel = (int)ob.getDouble("vert_vel");
-		marioFrame = (int)ob.getLong("marioFrame");
-//		model.scrollPos = (int)ob.getLong("model.scrollPos");
-//		model.back_x = (int)ob.getLong("model.back_x");
+		w = 60;
+		h = 95;
+		vert_vel = 0;
+		marioFrame = 0;
 		model.scrollPos = 0;
 		model.back_x = 0;
 		direction = Directions.RIGHT;
@@ -155,13 +153,6 @@ public class Mario extends Sprite {
 	public Json marshall() {
 		// Put values into Jason object
 		Json ob = Json.newObject();
-//		ob.add("x", x);
-		ob.add("w", w);
-		ob.add("h", h);
-		ob.add("vert_vel", vert_vel);
-		ob.add("marioFrame", marioFrame);
-//		ob.add("model.scrollPos", model.scrollPos);
-//		ob.add("model.back_x", model.back_x);
 		ob.add("type", "src.main.java.sprites.Mario");
 		return ob;
 	}
