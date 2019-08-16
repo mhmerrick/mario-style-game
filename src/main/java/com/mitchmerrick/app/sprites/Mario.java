@@ -8,12 +8,10 @@ import com.mitchmerrick.app.Json;
 import java.awt.Graphics;
 
 public class Mario extends Sprite {
-	int marioFrame;
-	int count; // Counts when mario is in the air
-	public boolean forward; // Walking direction
-
-	Model model;
-	static Sounds bump = new Sounds("src/main/resources/sounds/bump.wav", 5);
+	private Model model;
+	private int marioFrame;
+	private int count; // Counts when mario is in the air
+	static Sounds bump;
 
 	public Mario(Model m) {
 		model = m;
@@ -23,8 +21,10 @@ public class Mario extends Sprite {
 		h = 95;
 		vert_vel = 0;
 		marioFrame = 0;
-		forward = true;
+		direction = Directions.RIGHT;
 		count = 0;
+
+		bump = new Sounds("/sounds/bump.wav", 2);
 	}
 
 	boolean isMario() { return true; }
@@ -32,7 +32,7 @@ public class Mario extends Sprite {
 	public void draw(Graphics g) {
 		// Draw current mario
 		//int marioFrame = (Math.abs(model.scrollPos) / 8) % 5; // 20 = run speed; 5 = total number of frames we have to work with
-		if(forward)
+		if(direction == Directions.RIGHT)
 			g.drawImage(View.marioImages[marioFrame], x, y, null);
 		else
 			g.drawImage(View.marioImagesBackwards[marioFrame], x, y, null);
@@ -55,7 +55,7 @@ public class Mario extends Sprite {
 		for(int i = 0; i < model.sprites.size(); i++) {
 			Sprite s = model.sprites.get(i);
 			if((s.isBrick() || s.isCoinBlock() || s.isTurtle() || s.isGoomba()) && doesCollide(model.scrollPos, this, s))
-				Barrier(s);
+				barrier(s);
 			else if(s.isFlagPole() && doesCollide(model.scrollPos, this, s)) {
 				if(this.x + this.w + model.scrollPos >= s.x + 10) {
 					model.scrollPos -= 10;
@@ -73,7 +73,7 @@ public class Mario extends Sprite {
 	}
 
 	// Stops passing through sprite
-	void Barrier(Sprite s) {
+	void barrier(Sprite s) {
 		// From left
 		if(x + model.scrollPos + w >= s.x && prev_x + model.prev_scrollPos + w < s.x) {
 			model.scrollPos -= 10;
@@ -109,6 +109,7 @@ public class Mario extends Sprite {
 	// Controller methods
 	//---------------------------------------------------
 	public void right() {
+		direction = Directions.RIGHT;
 		model.scrollPos += 10;
 		model.back_x -= 8;
 		marioFrame++;
@@ -118,6 +119,7 @@ public class Mario extends Sprite {
 	}
 
 	public void left() {
+		direction = Directions.LEFT;
 		model.scrollPos -= 10;
 		model.back_x += 8;
 		marioFrame--;
@@ -126,6 +128,7 @@ public class Mario extends Sprite {
 			marioFrame = 4;
 	}
 
+	// TODO: fix goomba jump
 	public void jump() {
 		if(count < 4)
 			vert_vel -= 14;
@@ -137,26 +140,19 @@ public class Mario extends Sprite {
 	public Mario(Json ob, Model m) {
 		model = m;
 		// Change values back to numbers
-		x = (int)ob.getLong("x");
-		w = (int)ob.getLong("w");
-		h = (int)ob.getLong("h");
-		vert_vel = (int)ob.getDouble("vert_vel");
-		marioFrame = (int)ob.getLong("marioFrame");
-		model.scrollPos = (int)ob.getLong("model.scrollPos");
-		model.back_x = (int)ob.getLong("model.back_x");
-		forward = true;
+		x = 200;
+		w = 60;
+		h = 95;
+		vert_vel = 0;
+		marioFrame = 0;
+		model.scrollPos = 0;
+		model.back_x = 0;
+		direction = Directions.RIGHT;
 	}
 
 	public Json marshall() {
 		// Put values into Jason object
 		Json ob = Json.newObject();
-		ob.add("x", x);
-		ob.add("w", w);
-		ob.add("h", h);
-		ob.add("vert_vel", vert_vel);
-		ob.add("marioFrame", marioFrame);
-		ob.add("model.scrollPos", model.scrollPos);
-		ob.add("model.back_x", model.back_x);
 		ob.add("type", "src.main.java.sprites.Mario");
 		return ob;
 	}

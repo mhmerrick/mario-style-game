@@ -4,10 +4,11 @@
 // ----------------------------------------------------------------
 package com.mitchmerrick.app;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
@@ -276,6 +277,25 @@ public abstract class Json
 			throw new RuntimeException(e);
 		}
 		return parse(contents);
+	}
+
+	public static Json load(InputStream is)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = null;
+		try
+		{
+			try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
+				while ((line = bufferedReader.readLine()) != null) {
+					stringBuilder.append(line);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+		return parse(stringBuilder.toString());
 	}
 
 	public static class StringParser

@@ -56,11 +56,10 @@ public class Goomba extends Sprite {
 			// Is goomba colliding
 			for(int i = 0; i < model.sprites.size(); i++) {
 				Sprite s = model.sprites.get(i);
-				if((s.isBrick() || s.isCoinBlock() || s.isFlagPole() || s.isTurtle()) && doesCollide(0, this, s)) {
-					Barrier(s);
-				}
+				if((s.isBrick() || s.isCoinBlock() || s.isFlagPole() || s.isTurtle()) && doesCollide(0, this, s))
+					barrier(0, 0, this, s);
 				else if (s.isMario() && doesCollide(model.scrollPos, s, this))
-					Barrier(model.scrollPos, model.prev_scrollPos, this, s);
+					barrier(model.scrollPos, model.prev_scrollPos, this, s);
 			}
 		}
 		else {
@@ -95,38 +94,6 @@ public class Goomba extends Sprite {
 	void prevLocation() {
 		prev_x = x;
 		prev_y = y;
-	}
-	
-	// Stops passing through sprite
-	void Barrier(Sprite s) {
-		// From left
-		if(x + w >= s.x && prev_x + w < s.x) {
-			direction = Sprite.Directions.LEFT;
-		}
-		// From right
-		else if(x <= s.x + s.w && prev_x > s.x + s.w) {
-			direction = Sprite.Directions.RIGHT;
-		}
-		// From top
-		else if(y + h >= s.y && prev_y + h < s.y) {
-			y = s.y - h - 1;
-			vert_vel = 0;
-		}
-		// From bottom
-		else if(y <= s.y + s.h && prev_y > s.y + s.h) {
-			y = s.y + s.h + 1;
-			vert_vel = 0;
-			/*if(s.isMario()) {
-				// Squash
-				this.goombaFrame = 2;
-				this.killed = true;
-				//((src.main.java.sprites.Goomba)s).groundLevel = 605;
-				this.h = 30;
-				// Jump after kill 
-				((Mario)s).vert_vel-=30;
-				bump.play();
-			}*/
-		}
 	}
 
 	public void squish(Mario mario) {

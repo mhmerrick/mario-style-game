@@ -6,9 +6,9 @@ import com.mitchmerrick.app.view.View;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.io.*;
 
-public class Game extends JFrame
-{
+public class Game extends JFrame {
 
 	Controller controller;
 	View view;
@@ -17,7 +17,6 @@ public class Game extends JFrame
 
 	// TODO: fix music
 	public Game() {
-		themeMusic  = new Sounds("src/main/resources/sounds/Overworld.wav", 2);
 		model = new Model();
 		controller = new Controller(model);
 		view = new View(model);
@@ -29,9 +28,12 @@ public class Game extends JFrame
 		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+
+		themeMusic = new Sounds("/sounds/Overworld.wav", 2);
 	}
 
 	public void run() {
+		// TODO: fix music being played
 		themeMusic.play();
 
 		while(true) {
@@ -49,6 +51,8 @@ public class Game extends JFrame
 			}
 		}
 	}
+
+	// TODO: remove target from github
 
 	public static void main(String[] args) {
 		Game g = new Game();

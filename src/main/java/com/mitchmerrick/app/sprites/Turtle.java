@@ -6,11 +6,11 @@ import com.mitchmerrick.app.Json;
 import java.awt.Graphics;
 
 public class Turtle extends Sprite {
-	int turtleFrame;
-	boolean killed;
-	int groundLevel = 575;
+	private int turtleFrame;
+	private boolean killed;
+	private int groundLevel = 575;
 
-	Model model;
+	private Model model;
 
 	public Turtle(Model m, int xx, int yy) {
 	    model = m;
@@ -50,11 +50,10 @@ public class Turtle extends Sprite {
 		// Is turtle colliding with a brick
 		for(int i = 0; i < model.sprites.size(); i++) {
 			Sprite s = model.sprites.get(i);
-			if((s.isBrick() || s.isCoinBlock() || s.isFlagPole()) && doesCollide(0, this, s)) {
-				Barrier(s);
-			}
+			if((s.isBrick() || s.isCoinBlock() || s.isFlagPole()) && doesCollide(0, this, s))
+				barrier(0, 0, this, s);
 			else if (s.isMario() && doesCollide(model.scrollPos, s, this))
-				Barrier(model.scrollPos, model.prev_scrollPos, this, s);
+				barrier(model.scrollPos, model.prev_scrollPos, this, s);
 		}
 	}
 
@@ -95,28 +94,6 @@ public class Turtle extends Sprite {
 	private void prevLocation() {
 		prev_x = x;
 		prev_y = y;
-	}
-	
-	// Stops passing through sprite
-	private void Barrier(Sprite s) {
-		// From left
-		if(x + w >= s.x && prev_x + w < s.x) {
-			direction = Sprite.Directions.LEFT;
-		}
-		// From right
-		else if(x <= s.x + s.w && prev_x > s.x + s.w) {
-			direction = Sprite.Directions.RIGHT;
-		}
-		// From top
-		else if(y + h >= s.y && prev_y + h < s.y) {
-			y = s.y - h - 1;
-			vert_vel = 0;
-		}
-		// From bottom
-		else if(y <= s.y + s.h && prev_y > s.y + s.h) {
-			y = s.y + s.h + 1;
-			vert_vel = 0;
-		}
 	}
 
 	public void squish(Mario mario) {
