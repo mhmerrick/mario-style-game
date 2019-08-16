@@ -1,6 +1,10 @@
 
 # Default ignored files
 /workspace.xml
-/target/*
+
+# Ignore folders
+/target
+
+# Ignore files
 *.class
 *.jar
