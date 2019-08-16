@@ -51,9 +51,7 @@ public class Sounds
 				tempFile.deleteOnExit();
 				FileUtils.copyInputStreamToFile(is, tempFile);
 				AudioInputStream inputStream = AudioSystem.getAudioInputStream(tempFile);
-//				AudioInputStream inputStream = (AudioInputStream) is;
 				AudioFormat format = inputStream.getFormat();
-//				AudioFormat format = ".wav";
 				DataLine.Info info = new DataLine.Info(Clip.class, format);
 				clips[i] = (Clip)AudioSystem.getLine(info);
 				clips[i].open(inputStream);
@@ -61,17 +59,16 @@ public class Sounds
 			catch(Exception e)
 			{
 				e.printStackTrace(System.err);
-//				System.out.println("Could not load " + filename.toString());
-				System.out.println("Could not load audio.");
+				System.out.println("Could not load " + resourcePath);
 				System.exit(1);
 			}
 		}
 	}
 
-	public void play()
+	public void play(int loopCount)
 	{
 		clips[pos].setFramePosition(0);
-		clips[pos].loop(0);
+		clips[pos].loop(loopCount);
 		if(++pos >= clips.length)
 			pos = 0;
 	}

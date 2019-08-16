@@ -136,7 +136,6 @@ public class Mario extends Sprite {
 	//---------------------------------------------------
 	//---------------------------------------------------
 
-
 	public Mario(Json ob, Model m) {
 		model = m;
 		// Change values back to numbers

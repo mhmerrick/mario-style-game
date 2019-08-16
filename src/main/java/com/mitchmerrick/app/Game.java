@@ -6,16 +6,13 @@ import com.mitchmerrick.app.view.View;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
-import java.io.*;
 
 public class Game extends JFrame {
 
 	Controller controller;
 	View view;
 	Model model;
-	static Sounds themeMusic;
 
-	// TODO: fix music
 	public Game() {
 		model = new Model();
 		controller = new Controller(model);
@@ -28,14 +25,9 @@ public class Game extends JFrame {
 		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-
-		themeMusic = new Sounds("/sounds/Overworld.wav", 2);
 	}
 
 	public void run() {
-		// TODO: fix music being played
-		themeMusic.play();
-
 		while(true) {
 			controller.update();
 			model.update();

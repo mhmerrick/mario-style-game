@@ -28,7 +28,7 @@ public class Coin extends Sprite {
 		
 		randNum = rand.nextInt(100) + 1;
 
-		CoinBlock.coinSound.play();
+		CoinBlock.coinSound.play(0);
 	}
 	
 	boolean isCoin() { return true; }

@@ -103,7 +103,7 @@ public class Goomba extends Sprite {
 		// Jump after kill
 		if(!(this.killed)) {
 			mario.vert_vel-=30;
-			Mario.bump.play();
+			Mario.bump.play(0);
 		}
 		this.killed = true;
 	}

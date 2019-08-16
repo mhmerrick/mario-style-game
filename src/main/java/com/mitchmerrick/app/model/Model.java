@@ -1,5 +1,7 @@
 package com.mitchmerrick.app.model;
 
+import com.mitchmerrick.app.Game;
+import com.mitchmerrick.app.Sounds;
 import com.mitchmerrick.app.sprites.*;
 import com.mitchmerrick.app.Json;
 
@@ -15,6 +17,7 @@ public class Model
 	public Mario mario;
 	private FlagPole flagPole;
 	public Sprite sprite;
+	static Sounds themeMusic;
 
 	public Model() {
 		mario = new Mario(this);
@@ -22,6 +25,7 @@ public class Model
 		sprites = new ArrayList<Sprite>();
 		sprites.add(mario);
 		sprites.add(flagPole);
+		themeMusic = new Sounds("/sounds/Overworld.wav", 1);
 //		unmarshall(); // Loads previously saved game
 	}
 
@@ -92,6 +96,8 @@ public class Model
 			else if(str.equals("src.main.java.sprites.Goomba"))
 				sprites.add(new Goomba(j, this));
 		}
+		// Play music
+		themeMusic.play(3);
 	}
 
 	private Json marshall() {

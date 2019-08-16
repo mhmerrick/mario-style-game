@@ -50,8 +50,11 @@ public class Turtle extends Sprite {
 		// Is turtle colliding with a brick
 		for(int i = 0; i < model.sprites.size(); i++) {
 			Sprite s = model.sprites.get(i);
-			if((s.isBrick() || s.isCoinBlock() || s.isFlagPole()) && doesCollide(0, this, s))
+			if((s.isBrick() || s.isCoinBlock() || s.isFlagPole()) && doesCollide(0, this, s)) {
 				barrier(0, 0, this, s);
+				if(killed)
+					Mario.bump.play(0);
+			}
 			else if (s.isMario() && doesCollide(model.scrollPos, s, this))
 				barrier(model.scrollPos, model.prev_scrollPos, this, s);
 		}
@@ -104,7 +107,7 @@ public class Turtle extends Sprite {
 			h -= 20;
 
 			killed = true;
-			Mario.bump.play();
+			Mario.bump.play(0);
 		}
 		direction = Directions.STOPPED;
 	}
